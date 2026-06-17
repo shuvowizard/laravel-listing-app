@@ -1,6 +1,7 @@
 import { createApp, h } from 'vue'
 import { createInertiaApp, Link, Head } from '@inertiajs/vue3'
 import { ZiggyVue } from '../../vendor/tightenco/ziggy'
+import AppLayout from '@/Layouts/AppLayout.vue'
 
 createInertiaApp({
     title: title => `${title} ${import.meta.env.VITE_APP_NAME}`,
