@@ -1,9 +1,13 @@
 @import 'tailwindcss';
 @plugin "@tailwindcss/forms";
 
+/* Dark mode class strategy */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
+/* Fonts */
 @theme {
     --font-montserrat: "Montserrat", sans-serif;
 }

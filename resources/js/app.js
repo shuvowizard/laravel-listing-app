@@ -2,6 +2,7 @@ import { createApp, h } from 'vue'
 import { createInertiaApp, Link, Head } from '@inertiajs/vue3'
 import { ZiggyVue } from '../../vendor/tightenco/ziggy'
 import AppLayout from '@/Layouts/AppLayout.vue'
+import { setThemeOnLoad } from './Composables/useTheme';
 
 createInertiaApp({
     title: title => `${title} ${import.meta.env.VITE_APP_NAME}`,
@@ -19,4 +20,6 @@ createInertiaApp({
             .component('Head', Head)
             .mount(el)
     },
-}) 
+});
+
+setThemeOnLoad();

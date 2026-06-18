@@ -12,7 +12,7 @@
         <x-inertia::head />
     </head>
 
-    <body class="font-montserrat">
+    <body class="font-montserrat bg-slate-100 text-slate-900 dark:bg-slate-900 dark:text-white">
         <x-inertia::app />
         @routes
     </body>
