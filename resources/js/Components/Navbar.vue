@@ -1,5 +1,6 @@
 <script setup>
 import { toggleTheme } from '../Composables/useTheme';
+import NavLink from '@/Components/NavLink.vue'
 
 </script>
 
@@ -9,21 +10,15 @@ import { toggleTheme } from '../Composables/useTheme';
         <div class="mx-auto flex max-w-6xl items-center justify-between px-3 py-3">
 
             <!-- Logo -->
-            <Link :href="route('home')" class="text-xl font-bold leading-tight rounded-lg px-2 py-1.5 text-slate-600 transition hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white">
-                Home
-            </Link>
+            <NavLink routeName="home" componentName="HomePage">Home</NavLink>
 
             <!-- Navigation -->
-            <div class="flex items-center gap-2">
-                
-                 <Link href="#" class=" text-sm font-medium rounded-lg px-3 py-2 text-slate-600 transition hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white">
-                    Login
-                </Link>
+            <div class="flex items-center space-x-2">
 
-                <Link href="#" class=" text-sm font-medium rounded-lg px-3 py-2 text-slate-600 transition hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white">
-                    Register
-                </Link>
-                
+                <NavLink routeName="login" componentName="Auth/Login">Login</NavLink>
+
+                <NavLink routeName="register" componentName="Auth/Register">Register</NavLink>
+
                 <!-- Theme Toggle -->
                 <button
                     @click="toggleTheme"                    
