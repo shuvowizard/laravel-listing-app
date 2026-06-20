@@ -20,5 +20,5 @@ Route::get('/contact', function () {
     return inertia('ContactPage');
 })->name('contact');
 
-Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
-Route::get('/register', [RegisterController::class, 'showRegisterForm'])->name('register');
+Route::get('/login', [LoginController::class, 'create'])->name('login');
+Route::get('/register', [RegisterController::class, 'create'])->name('register');

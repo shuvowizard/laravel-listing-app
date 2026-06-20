@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
-    public function showRegisterForm()
+    public function create()
     {
         return inertia('Auth/Register');
     }

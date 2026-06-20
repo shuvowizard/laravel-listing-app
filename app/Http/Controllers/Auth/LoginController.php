@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-    public function showLoginForm()
+    public function create()
     {
         return inertia('Auth/Login');
     }
