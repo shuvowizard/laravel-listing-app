@@ -11,4 +11,9 @@ class LoginController extends Controller
     {
         return inertia('Auth/Login');
     }
+
+    public function store(Request $request)
+    {
+        //
+    }
 }

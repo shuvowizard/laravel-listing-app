@@ -12,4 +12,5 @@ Route::middleware('guest')->group(function () {
 
     // ----------- Login -------------
     Route::get('/login', [LoginController::class, 'create'])->name('login');
+    Route::post('/login', [LoginController::class, 'store']);
 });
