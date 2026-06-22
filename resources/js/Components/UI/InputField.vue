@@ -40,7 +40,7 @@ const emit = defineEmits(["focus"]);
                 class="block w-full rounded-md pr-3 pl-9 text-sm dark:text-slate-900 border-slate-300 outline-0 focus:ring-1 focus:ring-inset focus:ring-indigo-400 focus:border-indigo-400 placeholder:text-slate-400"
             />
             <!-- Error message -->
-            <p v-if="error" class="absolute left-4 top-full text-xs text-red-500">
+            <p v-if="error" class="absolute left-4 top-full mt-1 text-xs text-red-500">
                 {{ error }}
             </p>
         </div>
