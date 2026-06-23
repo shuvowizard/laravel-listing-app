@@ -1,7 +1,12 @@
 <script setup>
-import { toggleTheme } from '../Composables/useTheme';
 import NavLink from '@/Components/NavLink.vue'
+import UserDropdown from '@/Components/UI/UserDropdown.vue';
+import { toggleTheme } from '../Composables/useTheme';
+import { usePage } from '@inertiajs/vue3';
+import { computed } from 'vue';
 
+const page = usePage();
+const user = computed(() => page.props.auth.user);
 </script>
 
 <template>
@@ -15,9 +20,15 @@ import NavLink from '@/Components/NavLink.vue'
             <!-- Navigation -->
             <div class="flex items-center space-x-2">
 
-                <NavLink routeName="login" componentName="Auth/Login">Login</NavLink>
-
-                <NavLink routeName="register" componentName="Auth/Register">Register</NavLink>
+                <!-- Authenticated -->
+                <UserDropdown v-if="user" :user="user" />
+                
+                <!-- Guest -->
+                 <div v-else class="space-x-6">
+                     <NavLink routeName="login" componentName="Auth/Login">Login</NavLink>
+     
+                     <NavLink routeName="register" componentName="Auth/Register">Register</NavLink>
+                 </div>
 
                 <!-- Theme Toggle -->
                 <button
