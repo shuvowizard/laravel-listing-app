@@ -35,7 +35,7 @@ defineProps({
                     >Dashboard</Link
                 >
                 <Link
-                    href="#"
+                    :href="route('logout')"
                     as="button"
                     method="post"
                     class="block w-full px-6 py-2 hover:bg-slate-300 dark:hover:bg-slate-700 text-left"

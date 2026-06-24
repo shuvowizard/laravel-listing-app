@@ -32,4 +32,12 @@ class LoginController extends Controller
             'email' => 'These credentials do not match our records.',
         ]);
     }
+
+    public function destroy(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
+    }
 }
