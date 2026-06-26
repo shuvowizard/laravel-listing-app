@@ -4,65 +4,65 @@ import Title from "../../Components/UI/Title.vue";
 import TextLink from "../../Components/UI/TextLink.vue";
 import InputField from "../../Components/UI/InputField.vue";
 import PrimaryBtn from "../../Components/UI/PrimaryBtn.vue";
-import CheckBox from "../../Components/UI/CheckBox.vue";
-import SessionMessage from "../../Components/UI/SessionMessage.vue";
 import { useForm } from "@inertiajs/vue3";
 
-defineProps({
-    status: String,
-});
+const props = defineProps({
+    token: String,
+    email: String
+})
 
 const form = useForm({
-    email: "",
+    token: props.token,
+    email: props.email,
     password: "",
-    remember: null,
+    password_confirmation: "",
 });
 
 const submit = () => {
-    form.post(route("login"), {
-        onFinish: () => form.reset("password"),
+    form.post(route("password.update"), {
+        onFinish: () => form.reset("password", "password_confirmation"),
     });
 };
 </script>
 
 <template>
-    <Head title="Login -" />
+    <Head title="Register -" />
 
-    <Container class="w-1/3">
+    <Container class="w-1/3 mt-30">
         <div class="mb-8 text-center">
-            <Title>Login to your account</Title>
-            <p>
-                Create account?
-                <TextLink routeName="register" label="Register" />
-            </p>
+            <Title>Enter your new password</Title>
         </div>
-
-        <SessionMessage :status="status" />
 
         <form @submit.prevent="submit" class="space-y-6">
             <InputField
                 type="email"
+                v-model="form.email"
                 label="Email"
                 icon="at"
                 placeholder="email@example.com"
-                v-model="form.email"
                 :error="form.errors.email"
                 @focus="form.clearErrors('email')"
             />
             <InputField
                 type="password"
+                v-model="form.password"
                 label="Password"
                 icon="key"
                 placeholder="Enter password"
-                v-model="form.password"
                 :error="form.errors.password"
                 @focus="form.clearErrors('password')"
             />
-            <div class="flex items-center justify-between">
-                <CheckBox v-model="form.remember" name="remember" label="Remember me" />
-                <TextLink routeName="password.request" label="Forgot Password?" />
-            </div>
-            <PrimaryBtn :disabled="form.processing">Login</PrimaryBtn>
+            <InputField
+                type="password"
+                v-model="form.password_confirmation"
+                label="Confirm Password"
+                icon="key"
+                placeholder="Confirm password"
+                :error="form.errors.confirm_password"
+                @focus="form.clearErrors('confirm_password')"
+            />
+
+            <PrimaryBtn :disabled="form.processing">Reset Password</PrimaryBtn>
         </form>
     </Container>
 </template>

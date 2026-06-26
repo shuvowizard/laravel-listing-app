@@ -11,7 +11,7 @@ class LoginController extends Controller
 {
     public function create()
     {
-        return inertia('Auth/Login');
+        return inertia('Auth/Login', ['status' => session('status')]);
     }
 
     public function store(Request $request)
@@ -25,7 +25,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
-            return redirect()->intended();
+            return redirect()->intended('home');
         }
 
         throw ValidationException::withMessages([
