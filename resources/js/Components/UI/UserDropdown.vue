@@ -25,12 +25,12 @@ defineProps({
                 class="text-slate-600 bg-slate-100 dark:bg-slate-900 dark:text-white rounded-lg border-slate-600 border overflow-hidden w-40"
             >
                 <Link
-                    href="#"
+                    :href="route('profile.edit')"
                     class="block w-full px-6 py-2 hover:bg-slate-300 dark:hover:bg-slate-700 text-left"
                     >Profile</Link
                 >
                 <Link
-                    href="#"
+                    :href="route('dashboard')"
                     class="block w-full px-6 py-2 hover:bg-slate-300 dark:hover:bg-slate-700 text-left"
                     >Dashboard</Link
                 >

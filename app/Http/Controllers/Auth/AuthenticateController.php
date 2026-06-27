@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
-class LoginController extends Controller
+class AuthenticateController extends Controller
 {
     public function create()
     {
@@ -25,7 +25,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
-            return redirect()->intended('home');
+            return redirect()->intended('dashboard');
         }
 
         throw ValidationException::withMessages([

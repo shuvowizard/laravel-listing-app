@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticateController;
 use App\Http\Controllers\Auth\EmailVerificationController;
-use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use Illuminate\Support\Facades\Route;
@@ -13,8 +13,8 @@ Route::middleware('guest')->group(function () {
     Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 
     // ----------- Login -------------
-    Route::get('/login', [LoginController::class, 'create'])->name('login');
-    Route::post('/login', [LoginController::class, 'store']);
+    Route::get('/login', [AuthenticateController::class, 'create'])->name('login');
+    Route::post('/login', [AuthenticateController::class, 'store']);
 
     // ----------- Forgot Password -------------
     Route::get('/forgot-password', [ResetPasswordController::class, 'requestPass'])->name('password.request');
@@ -26,7 +26,7 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     // ----------- Logout ------------- //
-    Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
+    Route::post('/logout', [AuthenticateController::class, 'destroy'])->name('logout');
 
     // ----------- Email Verification -------------    
     Route::get('/email/verify', [EmailVerificationController::class, 'notice'])->name('verification.notice');
