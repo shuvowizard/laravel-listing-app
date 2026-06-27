@@ -1,0 +1,42 @@
+<script setup>
+import Container from "@/Components/UI/Container.vue";
+import InputField from "@/Components/UI/InputField.vue";
+import PrimaryBtn from "@/Components/UI/PrimaryBtn.vue";
+import { useForm } from "@inertiajs/vue3";
+
+const form = useForm({
+    password: "",
+});
+
+const submit = () => {
+    form.post(route('password.confirm'), {
+        onFinish: () => form.reset(),
+    });
+};
+</script>
+
+<template>
+    <Head title="Password Confirmation -" />
+
+    <Container class="w-1/3">
+        <div class="mb-8 text-center">
+            <p>
+                This is a secure area of the application. Please confirm your
+                password before continuing.
+            </p>
+        </div>
+
+        <form @submit.prevent="submit" class="space-y-6">
+            <InputField
+                type="password"
+                label="Password"
+                icon="key"
+                placeholder="Enter password"
+                v-model="form.password"
+                :error="form.errors.password"
+                @focus="form.clearErrors('password')"
+            />
+            <PrimaryBtn :disabled="form.processing" class="w-full">Confirm</PrimaryBtn>
+        </form>
+    </Container>
+</template>
