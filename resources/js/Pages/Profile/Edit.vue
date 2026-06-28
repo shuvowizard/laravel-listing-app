@@ -1,9 +1,18 @@
 <script setup>
+import UpdateInfo from './Sections/UpdateInfo.vue';
+
+defineProps({
+    user: Object,
+    status: String
+})
 
 </script>
 
 <template>
-    <h1 class="text-3xl font-bold underline text-center text-red-600 mt-5">Edit Profile</h1>
+   <Head title="Edit Profile -"/>
+
+    <UpdateInfo :user="user" :status="status"/>
+
 </template>
 
 <style scoped>

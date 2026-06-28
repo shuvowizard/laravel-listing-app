@@ -1,11 +1,18 @@
 <?php
 
+use App\Http\Controllers\Auth\DashboardController;
+use App\Http\Controllers\Auth\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::inertia('/', 'HomePage')->name('home');
 
-Route::inertia('/dashboard', 'Dashboard')->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth'])->group(function () {
+    // ----------- Dashboard -------------
+    Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('verified')->name('dashboard');
 
-Route::inertia('/profile', 'Profile/Edit')->middleware(['auth', 'password.confirm'])->name('profile.edit');
+    // ----------- Profile -------------
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'updateInfo'])->name('profile.info.update');
+});
 
 require __DIR__ . '/auth.php';
