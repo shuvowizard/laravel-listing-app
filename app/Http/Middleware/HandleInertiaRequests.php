@@ -42,6 +42,9 @@ class HandleInertiaRequests extends Middleware
                     ? $request->user()->only('id', 'name')
                     : null,
             ],
+            'flash' => [
+                'status' => session('status'),
+            ],
         ];
     }
 }

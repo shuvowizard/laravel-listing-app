@@ -12,8 +12,7 @@ class ProfileController extends Controller
     public function index(Request $request)
     {
         return inertia('Profile/Edit', [
-            'user' => $request->user(), 
-            'status' => session('status')
+            'user' => $request->user(),
         ]);
     }
 

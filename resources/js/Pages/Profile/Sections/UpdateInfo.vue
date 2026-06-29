@@ -4,12 +4,15 @@ import Title from "../../../Components/UI/Title.vue";
 import InputField from "../../../Components/UI/InputField.vue";
 import PrimaryBtn from "../../../Components/UI/PrimaryBtn.vue";
 import SessionMessage from "../../../Components/UI/SessionMessage.vue";
-import { useForm, router } from "@inertiajs/vue3";
+import { useForm, router, usePage } from "@inertiajs/vue3";
+import { computed } from "vue";
 
 const props = defineProps({
     user: Object,
-    status: String
 });
+
+const page = usePage();
+const status = computed(() => page.props.flash.status);
 
 const form = useForm({
     name: props.user.name,
@@ -56,8 +59,8 @@ const resendEmail = (e) => {
             />
 
             <div v-if="user.email_verified_at === null" class="flex items-center gap-2">
-                <SessionMessage :status="status" />
-                <p class="text-sm text-amber-500 font-medium mb-4 dark:text-amber-400">
+                <SessionMessage :status="status"  class="mb-0!"/>
+                <p class="text-sm text-amber-500 font-medium dark:text-amber-400">
                     Your email address is unverified. 
                     <button @click="resendEmail" class="text-sm text-amber-600 hover:underline hover:cursor-pointer disabled:cursor-wait dark:text-amber-500">
                         Click here to resend the verification email.
