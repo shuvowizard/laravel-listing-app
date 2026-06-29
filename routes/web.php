@@ -13,6 +13,7 @@ Route::middleware(['auth'])->group(function () {
     // ----------- Profile -------------
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'updateInfo'])->name('profile.info.update');
+    Route::put('/profile', [ProfileController::class, 'updatePassword'])->name('profile.password.update');
 });
 
 require __DIR__ . '/auth.php';

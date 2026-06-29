@@ -65,7 +65,10 @@ const resendEmail = (e) => {
                 </p>
             </div>
 
-            <PrimaryBtn :disabled="form.processing">Save</PrimaryBtn>
+            <div class="flex items-center gap-4">
+                <PrimaryBtn :disabled="form.processing">Save</PrimaryBtn>
+                <p v-if="form.recentlySuccessful" class="text-md font-medium text-green-500 dark:text-green-400">Saved!</p>
+            </div>
         </form>
 
     </Container>
