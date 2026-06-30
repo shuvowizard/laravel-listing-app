@@ -1,4 +1,5 @@
 <script setup>
+import DeleteAccount from './Sections/DeleteAccount.vue';
 import UpdateInfo from './Sections/UpdateInfo.vue';
 import UpdatePassword from './Sections/UpdatePassword.vue';
 
@@ -12,8 +13,9 @@ defineProps({
 <template>
    <Head title="Edit Profile -"/>
 
-    <UpdateInfo :user="user" :status="status"/>
+    <UpdateInfo :user="user" />
     <UpdatePassword />
+    <DeleteAccount />
 
 </template>
 
