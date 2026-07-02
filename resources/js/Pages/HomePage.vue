@@ -1,5 +1,6 @@
 <script setup>
 import Card from '../Components/UI/Card.vue';
+import PaginationLink from '../Components/UI/PaginationLink.vue';
 defineProps({
     listings: Object,
 })
@@ -16,6 +17,10 @@ defineProps({
                 <Card :listing="listing" />
             </div>
         </div>
+
+        <div class="mt-8">
+            <PaginationLink :paginator="listings" />
+        </div>   
     </div>
 
 </template>
