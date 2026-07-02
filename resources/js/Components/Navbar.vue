@@ -11,7 +11,7 @@ const user = computed(() => page.props.auth.user);
 
 <template>
     <!-- Navbar -->
-    <nav class="border-b border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900">
+    <nav class="sticky top-0 z-50 border-b border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900">
         <div class="mx-auto flex max-w-6xl items-center justify-between px-3 py-3">
 
             <!-- Logo -->
