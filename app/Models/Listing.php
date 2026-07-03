@@ -28,4 +28,13 @@ class Listing extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    // Local scope for search query
+    public function scopeFilter($query, array $filters)
+    {
+        if ($filters['search'] ?? false) {
+            return $query->where('title', 'like', '%' . request('search') . '%')
+                ->orWhere('description', 'like', '%' . request('search') . '%');
+        }
+    }
 }
