@@ -10,11 +10,13 @@ const props = defineProps({
 });
 
 const form = useForm({
-    search: props.filters ?? "",
+    search: props.filters?.search || "",
 });
 
+const params = route().params;
+
 const search = () => {
-    router.get(route("home"), { search: form.search });
+    router.get(route("home"), { search: form.search, user_id: params.user_id });
 };
 </script>
 
