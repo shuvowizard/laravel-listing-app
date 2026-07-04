@@ -8,7 +8,19 @@ defineProps({
 const params = route().params;
 
 const selectUser = (userId) => {
-    router.get(route("home"), { user_id: userId, search: params.search });
+    router.get(route("home"), {
+        user_id: userId,
+        search: params.search,
+        tag: params.tag,
+    });
+};
+
+const selectTag = (tag) => {
+    router.get(route("home"), {
+        tag: tag,
+        search: params.search,
+        user_id: params.user_id,
+    });
 };
 </script>
 
@@ -17,7 +29,6 @@ const selectUser = (userId) => {
         class="bg-white rounded-lg shadow-lg overflow-hidden dark:bg-slate-800 h-full flex flex-col justify-between"
     >
         <div>
-
             <!-- Image -->
             <Link href="">
                 <img
@@ -40,7 +51,10 @@ const selectUser = (userId) => {
                 <p>
                     Listed on
                     {{ new Date(listing.created_at).toLocaleDateString() }} by
-                    <button class="text-link hover:cursor-pointer" @click="selectUser(listing.user.id)">
+                    <button
+                        class="text-link hover:cursor-pointer"
+                        @click="selectUser(listing.user.id)"
+                    >
                         {{ listing.user.name }}
                     </button>
                 </p>
@@ -51,7 +65,8 @@ const selectUser = (userId) => {
         <div v-if="listing.tags" class="flex items-center gap-3 px-4 pb-4">
             <div v-for="tag in listing.tags.split(',')" :key="tag">
                 <button
-                    class="bg-slate-500 text-white px-2 py-px rounded-full hover:bg-slate-700 dark:hover:bg-slate-900"
+                    @click="selectTag(tag)"
+                    class="bg-slate-500 text-white px-2 py-px rounded-full hover:bg-slate-700 dark:hover:bg-slate-900 hover:cursor-pointer"
                 >
                     {{ tag }}
                 </button>
