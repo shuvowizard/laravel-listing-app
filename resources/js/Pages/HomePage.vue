@@ -4,6 +4,7 @@ import { useForm, router } from "@inertiajs/vue3";
 import Card from "../Components/UI/Card.vue";
 import InputField from "../Components/UI/InputField.vue";
 import PaginationLink from "../Components/UI/PaginationLink.vue";
+import RemoveFilters from "../Components/UI/RemoveFilters.vue";
 
 const props = defineProps({
     listings: Object,
@@ -26,12 +27,17 @@ watch(search, (value) => {
                 tag: params.tag,
             },
             {
-                preserveState: true,
                 replace: true,
             },
         );
     }, 300);
 });
+
+const userName = params.user_id
+    ? props.listings.data.find(
+          (listing) => listing.user_id === Number(params.user_id),
+      )?.user?.name
+    : null;
 </script>
 
 <template>
@@ -44,7 +50,8 @@ watch(search, (value) => {
     <div class="mx-auto max-w-7xl px-4 py-6">
         <!-- Search & Filters -->
         <div class="flex items-center justify-between mb-4">
-            <div>FIlters</div>
+            <!-- Remove Filters Component -->
+            <RemoveFilters :params="params" :userName="userName" />
 
             <div class="w-1/4">
                 <InputField
