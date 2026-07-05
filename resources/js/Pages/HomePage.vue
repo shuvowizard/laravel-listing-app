@@ -1,4 +1,5 @@
 <script setup>
+import { ref, watch } from "vue";
 import { useForm, router } from "@inertiajs/vue3";
 import Card from "../Components/UI/Card.vue";
 import InputField from "../Components/UI/InputField.vue";
@@ -6,22 +7,31 @@ import PaginationLink from "../Components/UI/PaginationLink.vue";
 
 const props = defineProps({
     listings: Object,
-    filters: String,
-});
-
-const form = useForm({
-    search: props.filters?.search || "",
+    filters: Object,
 });
 
 const params = route().params;
 
-const search = () => {
-    router.get(route("home"), {
-        search: form.search,
-        user_id: params.user_id,
-        tag: params.tag
-    });
-};
+const search = ref(props.filters?.search || "");
+
+let debounceTimer = null;
+watch(search, (value) => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+        router.get(
+            route("home"),
+            {
+                search: value,
+                user_id: params.user_id,
+                tag: params.tag,
+            },
+            {
+                preserveState: true,
+                replace: true,
+            },
+        );
+    }, 300);
+});
 </script>
 
 <template>
@@ -37,15 +47,13 @@ const search = () => {
             <div>FIlters</div>
 
             <div class="w-1/4">
-                <form @submit.prevent="search">
-                    <InputField
-                        type="search"
-                        label=""
-                        icon="magnifying-glass"
-                        placeholder="Search..."
-                        v-model="form.search"
-                    />
-                </form>
+                <InputField
+                    type="search"
+                    label=""
+                    icon="magnifying-glass"
+                    placeholder="Search..."
+                    v-model="search"
+                />
             </div>
         </div>
 

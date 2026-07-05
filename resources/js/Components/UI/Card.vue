@@ -8,19 +8,31 @@ defineProps({
 const params = route().params;
 
 const selectUser = (userId) => {
-    router.get(route("home"), {
-        user_id: userId,
-        search: params.search,
-        tag: params.tag,
-    });
+    router.get(
+        route("home"),
+        {
+            user_id: userId,
+            search: params.search,
+            tag: params.tag,
+        },
+        {
+            replace: true,
+        },
+    );
 };
 
 const selectTag = (tag) => {
-    router.get(route("home"), {
-        tag: tag,
-        search: params.search,
-        user_id: params.user_id,
-    });
+    router.get(
+        route("home"),
+        {
+            tag: tag,
+            search: params.search,
+            user_id: params.user_id,
+        },
+        {
+            replace: true,
+        },
+    );
 };
 </script>
 
