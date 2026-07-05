@@ -33,19 +33,33 @@ class Listing extends Model
     // Local scope for search query
     public function scopeFilter(Builder $query, array $filters)
     {
-        if ($filters['search'] ?? false) {
-            $query->where(function ($q) use ($filters) {
-                $q->where('title', 'like', '%' . $filters['search'] . '%')
-                    ->orWhere('description', 'like', '%' . $filters['search'] . '%');
+        // if ($filters['search'] ?? false) {
+        //     $query->where(function ($q) use ($filters) {
+        //         $q->where('title', 'like', '%' . $filters['search'] . '%')
+        //             ->orWhere('description', 'like', '%' . $filters['search'] . '%');
+        //     });
+        // }
+
+        // if ($filters['user_id'] ?? false) {
+        //     $query->where('user_id', $filters['user_id']);
+        // }
+
+        // if ($filters['tag'] ?? false) {
+        //     $query->where('tags', 'like', '%' . $filters['tag'] . '%');
+        // }
+
+        $query
+            ->when($filters['search'] ?? false, function ($q, $search) {
+                $q->where(function ($q) use ($search) {
+                    $q->where('title', 'like', "%{$search}%")
+                        ->orWhere('description', 'like', "%{$search}%");
+                });
+            })
+            ->when($filters['user_id'] ?? false, function ($q, $user_id) {
+                $q->where('user_id', $user_id);
+            })
+            ->when($filters['tag'] ?? false, function ($q, $tag) {
+                $q->where('tags', 'like', "%{$tag}%");
             });
-        }
-
-        if ($filters['user_id'] ?? false) {
-            $query->where('user_id', $filters['user_id']);
-        }
-
-        if ($filters['tag'] ?? false) {
-            $query->where('tags', 'like', '%' . $filters['tag'] . '%');
-        }
     }
 }
