@@ -35,6 +35,11 @@ defineProps({
                     >Dashboard</Link
                 >
                 <Link
+                    :href="route('listing.create')"
+                    class="block w-full px-6 py-2 hover:bg-slate-300 dark:hover:bg-slate-700 text-left"
+                    >New Listing</Link
+                >
+                <Link
                     :href="route('logout')"
                     as="button"
                     method="post"
