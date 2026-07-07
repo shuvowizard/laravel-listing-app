@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreListingRequest;
-use App\Http\Requests\UpdateListingRequest;
 use App\Models\Listing;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ListingController extends Controller
 {
@@ -39,11 +38,33 @@ class ListingController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreListingRequest $request)
+    public function store(Request $request)
     {
-        //
-    }
+         // $newTags = explode(',' ,  $request->tags);
+        // $newTags = array_map('trim', $newTags);
+        // $newTags = array_filter($newTags);
+        // $newTags = array_unique($newTags);
+        // $newTags = implode(',', $newTags);
 
+        $fields = $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string'],
+            'tags' => ['nullable', 'string'],
+            'email' => ['nullable', 'email'],
+            'link' => ['nullable', 'url'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:3072'],
+        ]);
+        
+        if ($request->hasFile('image')) {
+            $fields['image'] = Storage::disk('public')->put('images/listing', $request->image);
+        }
+
+        $fields['tags'] = $request->tags ? implode(',', array_unique(array_filter(array_map('trim', explode(',', $request->tags))))) : null;
+
+        $request->user()->listings()->create($fields);
+
+        return redirect()->route('dashboard')->with('status', 'Listing created successfully!');
+    }
     /**
      * Display the specified resource.
      */
@@ -63,7 +84,7 @@ class ListingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateListingRequest $request, Listing $listing)
+    public function update(Request $request, Listing $listing)
     {
         //
     }

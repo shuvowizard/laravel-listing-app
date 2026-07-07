@@ -29,7 +29,7 @@ const form = useForm({
             <Title>Create a new Listing</Title>
         </div>
 
-        <form class="grid grid-cols-2 gap-6">
+        <form @submit.prevent="form.post(route('listing.store'))" class="grid grid-cols-2 gap-6">
             <InputField
                 label="Title"
                 icon="heading"
