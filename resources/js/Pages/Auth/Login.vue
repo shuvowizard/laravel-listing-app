@@ -28,7 +28,7 @@ const submit = () => {
 <template>
     <Head title="Login -" />
 
-    <Container class="w-1/3">
+    <Container class="w-1/2">
         <div class="mb-8 text-center">
             <Title>Login to your account</Title>
             <p>

@@ -13,7 +13,7 @@ import Navbar from '@/Components/Navbar.vue'
         <Navbar />
 
         <!-- Page content -->
-        <main class="p-6">
+        <main class="p-6 mx-auto max-w-5xl">
             <slot />
         </main>
     </div>

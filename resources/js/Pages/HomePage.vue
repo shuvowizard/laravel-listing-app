@@ -43,11 +43,7 @@ const userName = params.user_id
 <template>
     <Head title="Home -" />
 
-    <h1 class="mb-5 text-3xl font-bold underline text-center text-red-600 mt-5">
-        Home Page
-    </h1>
-
-    <div class="mx-auto max-w-7xl px-4 py-6">
+    <div>
         <!-- Search & Filters -->
         <div class="flex items-center justify-between mb-4">
             <!-- Remove Filters Component -->

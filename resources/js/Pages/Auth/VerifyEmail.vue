@@ -19,9 +19,9 @@ const submit = () => {
 <template>
     <Head title="Verify Email -" />
 
-    <Container class="w-1/3 mt-30">
+    <Container class="w-1/2 mt-30">
         <div class="mb-8">
-            <Title class="text-center text-slate-">Verify your email</Title>
+            <Title class="text-center text-slate-700">Verify your email</Title>
             <p>
                 Thanks for signing up! Before getting started, could you verify
                 your email address by clicking on the link we just emailed to

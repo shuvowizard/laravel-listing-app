@@ -20,11 +20,7 @@ const form = useForm({
 <template>
     <Head title="Create Listing -" />
 
-    <h1 class="mb-5 text-3xl font-bold underline text-center text-red-600 mt-5">
-        Create Listing
-    </h1>
-
-    <Container class="mx-auto max-w-5xl px-4 py-6">
+    <Container>
         <div class="mb-6">
             <Title>Create a new Listing</Title>
         </div>

@@ -19,7 +19,7 @@ const submit = () => {
 <template>
     <Head title="Forgot Password -" />
 
-    <Container class="w-1/3 mt-30">
+    <Container class="w-1/2 mt-30">
         <div class="mb-8 text-center">
             <p>
                 Forgot your password? No problem. Just let us know your email

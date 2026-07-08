@@ -32,7 +32,7 @@ const resendEmail = (e) => {
 </script>
 
 <template>
-    <Container class="w-3/4 mt-6">
+    <Container class="mb-6">
         <div class="mb-6">
             <Title>Update Information</Title>
             <p>Update your account's profile information and email address.</p>

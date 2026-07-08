@@ -18,7 +18,7 @@ const submit = () => {
 <template>
     <Head title="Password Confirmation -" />
 
-    <Container class="w-1/3">
+    <Container class="w-1/2">
         <div class="mb-8 text-center">
             <p>
                 This is a secure area of the application. Please confirm your

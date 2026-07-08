@@ -21,7 +21,7 @@ const submit = () => {
 </script>
 
 <template>
-    <Container class="w-3/4 mt-6">
+    <Container class="mb-6">
         <div class="mb-6">
             <Title>Delete Account</Title>
             <p>

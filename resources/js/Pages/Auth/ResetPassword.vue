@@ -28,7 +28,7 @@ const submit = () => {
 <template>
     <Head title="Register -" />
 
-    <Container class="w-1/3 mt-30">
+    <Container class="w-1/2 mt-30">
         <div class="mb-8 text-center">
             <Title>Enter your new password</Title>
         </div>
