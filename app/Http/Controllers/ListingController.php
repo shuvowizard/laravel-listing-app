@@ -70,7 +70,7 @@ class ListingController extends Controller
      */
     public function show(Listing $listing)
     {
-        //
+        return inertia('Listing/Show', ['listing' => $listing->load('user:id,name')]);
     }
 
     /**
