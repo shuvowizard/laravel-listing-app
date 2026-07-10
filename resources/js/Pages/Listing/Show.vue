@@ -8,7 +8,7 @@ defineProps({
 <template>
     <Head title="Listing Details - " />
 
-    <Container class="flex gap-4 ">
+    <Container class="flex gap-4">
         <!-- Listing Image -->
         <div class="w-1/4 rounded-md overflow-hidden">
             <img
@@ -24,13 +24,21 @@ defineProps({
 
         <!-- Listing Details -->
         <div class="w-3/4">
-
             <!-- Listing info -->
             <div class="mb-6">
                 <div class="flex items-end justify-between mb-2">
                     <p class="text-gray-400 w-full border-b">Details</p>
-                    <!-- Edit Button -->
-                    <div>Edit and Delete</div>
+                    <!-- Edit and Delete Buttons -->
+                    <div class="pl-4 flex items-center gap-4">
+                        <Link
+                            :href="
+                                route('listing.edit', listing.id)
+                            "
+                            class="bg-green-500 text-white px-6 py-2 rounded-full hover:bg-transparent hover:text-green-500 border-2 border-green-500 transition dark:hover:bg-transparent dark:hover:text-green-500"
+                        >
+                            Edit
+                        </Link>
+                    </div>
                 </div>
                 <h3 class="font-bold text-2xl mb-4">{{ listing.title }}</h3>
                 <p>{{ listing.description }}</p>
@@ -70,19 +78,19 @@ defineProps({
                     {{ listing.user.name }}
                 </Link>
             </div>
-        </div>
 
-        <!-- Tags -->
-        <div v-if="listing.tags" class="mb-6">
-            <p class="text-slate-400 w-full border-b mb-2">Tags</p>
-            <div class="flex items-center gap-3">
-                <div v-for="tag in listing.tags.split(',')" :key="tag">
-                    <Link
-                        :href="route('home', { tag })"
-                        class="bg-slate-500 text-white px-2 py-px rounded-full hover:bg-slate-700 dark:hover:bg-slate-900"
-                    >
-                        {{ tag }}
-                    </Link>
+            <!-- Tags -->
+            <div v-if="listing.tags" class="mb-6">
+                <p class="text-slate-400 w-full border-b mb-2">Tags</p>
+                <div class="flex items-center gap-3">
+                    <div v-for="tag in listing.tags.split(',')" :key="tag">
+                        <Link
+                            :href="route('home', { tag })"
+                            class="bg-slate-500 text-white px-2 py-px rounded-full hover:bg-slate-700 dark:hover:bg-slate-900"
+                        >
+                            {{ tag }}
+                        </Link>
+                    </div>
                 </div>
             </div>
         </div>

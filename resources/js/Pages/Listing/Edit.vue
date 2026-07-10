@@ -7,25 +7,27 @@ import TextArea from "../../Components/UI/TextArea.vue";
 import ImageUpload from "../../Components/UI/ImageUpload.vue";
 import { useForm } from "@inertiajs/vue3";
 
+const props = defineProps({ listing: Object });
+
 const form = useForm({
-    title: "",
-    description: "",
-    tags: "",
-    email: "",
-    link: "",
+    title: props.listing.title,
+    description: props.listing.description,
+    tags: props.listing.tags,
+    email: props.listing.email,
+    link: props.listing.link,
     image: "",
 });
 </script>
 
 <template>
-    <Head title="Create Listing -" />
+    <Head title="Edit Listing -" />
 
     <Container>
         <div class="mb-6">
-            <Title>Create a new Listing</Title>
+            <Title>Edit your listing</Title>
         </div>
 
-        <form @submit.prevent="form.post(route('listing.store'))" class="grid grid-cols-2 gap-6">
+        <form class="grid grid-cols-2 gap-6">
             <InputField
                 label="Title"
                 icon="heading"
@@ -69,13 +71,12 @@ const form = useForm({
             />
             <ImageUpload
                 :error="form.errors.image"
-                @image="
-                    (e) => {
-                        form.image = e;
-                    }
-                "
+                @image="(e) => {form.image = e}"
+                :listingImage="listing.image"
             />
-            <PrimaryBtn :disabled="form.processing" class="col-span-2"> Create Listing </PrimaryBtn>
+            <PrimaryBtn :disabled="form.processing" class="col-span-2">
+                Update Listing
+            </PrimaryBtn>
         </form>
     </Container>
 </template>
