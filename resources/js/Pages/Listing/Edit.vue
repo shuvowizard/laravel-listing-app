@@ -16,6 +16,7 @@ const form = useForm({
     email: props.listing.email,
     link: props.listing.link,
     image: "",
+    _method: "PUT",
 });
 </script>
 
@@ -27,7 +28,10 @@ const form = useForm({
             <Title>Edit your listing</Title>
         </div>
 
-        <form class="grid grid-cols-2 gap-6">
+        <form 
+            @submit.prevent="form.post(route('listing.update', listing.id))"
+            class="grid grid-cols-2 gap-6"
+        >
             <InputField
                 label="Title"
                 icon="heading"

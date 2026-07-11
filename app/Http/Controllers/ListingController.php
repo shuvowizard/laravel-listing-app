@@ -40,7 +40,7 @@ class ListingController extends Controller
      */
     public function store(Request $request)
     {
-         // $newTags = explode(',' ,  $request->tags);
+        // $newTags = explode(',' ,  $request->tags);
         // $newTags = array_map('trim', $newTags);
         // $newTags = array_filter($newTags);
         // $newTags = array_unique($newTags);
@@ -86,7 +86,29 @@ class ListingController extends Controller
      */
     public function update(Request $request, Listing $listing)
     {
-        //
+        $fields = $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string'],
+            'tags' => ['nullable', 'string'],
+            'email' => ['nullable', 'email'],
+            'link' => ['nullable', 'url'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:3072'],
+        ]);
+
+        if ($request->hasFile('image')) {
+            if ($listing->image) {
+                Storage::disk('public')->delete($listing->image);
+            }
+            $fields['image'] = Storage::disk('public')->put('images/listing', $request->image);
+        } else {
+            $fields['image'] = $listing->image;
+        }
+
+        $fields['tags'] = $request->tags ? implode(',', array_unique(array_filter(array_map('trim', explode(',', $request->tags))))) : null;
+
+        $listing->update($fields);
+
+        return to_route('dashboard')->with('status', 'Listing updated successfully!');
     }
 
     /**
