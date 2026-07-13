@@ -1,8 +1,16 @@
 <script setup>
+import { router } from "@inertiajs/vue3";
 import Container from "../../Components/UI/Container.vue";
-defineProps({
+
+const props = defineProps({
     listing: Object,
 });
+
+const deleteListing = () => {
+    if (confirm("Are you sure you want to delete this listing?")) {
+        router.delete(route("listing.destroy", props.listing.id));
+    }
+};
 </script>
 
 <template>
@@ -31,13 +39,17 @@ defineProps({
                     <!-- Edit and Delete Buttons -->
                     <div class="pl-4 flex items-center gap-4">
                         <Link
-                            :href="
-                                route('listing.edit', listing.id)
-                            "
+                            :href="route('listing.edit', listing.id)"
                             class="bg-green-500 text-white px-6 py-2 rounded-full hover:bg-transparent hover:text-green-500 border-2 border-green-500 transition dark:hover:bg-transparent dark:hover:text-green-500"
                         >
                             Edit
                         </Link>
+                        <button
+                            @click="deleteListing"
+                            class="bg-red-500 text-white px-6 py-2 rounded-full hover:bg-transparent hover:text-red-500 border-2 border-red-500 transition dark:hover:bg-transparent dark:hover:text-red-500 hover:cursor-pointer"
+                        >
+                            Delete
+                        </button>
                     </div>
                 </div>
                 <h3 class="font-bold text-2xl mb-4">{{ listing.title }}</h3>
