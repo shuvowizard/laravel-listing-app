@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class ListingController extends Controller implements HasMiddleware
@@ -86,6 +87,8 @@ class ListingController extends Controller implements HasMiddleware
      */
     public function show(Listing $listing)
     {
+        Gate::authorize('view', $listing);
+
         return inertia('Listing/Show', ['listing' => $listing->load('user:id,name')]);
     }
 
