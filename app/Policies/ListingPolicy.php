@@ -15,7 +15,7 @@ class ListingPolicy
 
     public function create(User $user): bool
     {
-        return false;
+        return $user->role !== 'suspended';
     }
 
     public function Delete(User $user, Listing $listing): bool

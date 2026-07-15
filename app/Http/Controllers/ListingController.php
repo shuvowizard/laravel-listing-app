@@ -49,6 +49,8 @@ class ListingController extends Controller implements HasMiddleware
      */
     public function create()
     {
+        Gate::authorize('create', Listing::class);
+
         return inertia('Listing/Create');
     }
 
@@ -57,6 +59,8 @@ class ListingController extends Controller implements HasMiddleware
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', Listing::class);
+        
         // $newTags = explode(',' ,  $request->tags);
         // $newTags = array_map('trim', $newTags);
         // $newTags = array_filter($newTags);
