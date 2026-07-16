@@ -4,6 +4,7 @@ import Container from "../../Components/UI/Container.vue";
 
 const props = defineProps({
     listing: Object,
+    canModify: Boolean,
 });
 
 const deleteListing = () => {
@@ -37,7 +38,7 @@ const deleteListing = () => {
                 <div class="flex items-end justify-between mb-2">
                     <p class="text-gray-400 w-full border-b">Details</p>
                     <!-- Edit and Delete Buttons -->
-                    <div class="pl-4 flex items-center gap-4">
+                    <div v-if="canModify" class="pl-4 flex items-center gap-4">
                         <Link
                             :href="route('listing.edit', listing.id)"
                             class="bg-green-500 text-white px-6 py-2 rounded-full hover:bg-transparent hover:text-green-500 border-2 border-green-500 transition dark:hover:bg-transparent dark:hover:text-green-500"

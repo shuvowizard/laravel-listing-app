@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
@@ -93,7 +94,11 @@ class ListingController extends Controller implements HasMiddleware
     {
         Gate::authorize('view', $listing);
 
-        return inertia('Listing/Show', ['listing' => $listing->load('user:id,name')]);
+        return inertia('Listing/Show', [
+            'listing' => $listing->load('user:id,name'),
+            // 'canModify' => Gate::check('modify', $listing),
+            'canModify' => Auth::user() ? Auth::user()->can('modify', $listing) : false,
+        ]);
     }
 
     /**
@@ -101,6 +106,8 @@ class ListingController extends Controller implements HasMiddleware
      */
     public function edit(Listing $listing)
     {
+        Gate::authorize('modify', $listing);
+
         return inertia('Listing/Edit', ['listing' => $listing]);
     }
 
@@ -109,6 +116,8 @@ class ListingController extends Controller implements HasMiddleware
      */
     public function update(Request $request, Listing $listing)
     {
+        Gate::authorize('modify', $listing);
+
         $fields = $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
@@ -139,6 +148,8 @@ class ListingController extends Controller implements HasMiddleware
      */
     public function destroy(Listing $listing)
     {
+        Gate::authorize('modify', $listing);
+        
         if ($listing->image) {
             Storage::disk('public')->delete($listing->image);
         }

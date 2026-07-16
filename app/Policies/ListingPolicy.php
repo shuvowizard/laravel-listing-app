@@ -18,8 +18,8 @@ class ListingPolicy
         return $user->role !== 'suspended';
     }
 
-    public function Delete(User $user, Listing $listing): bool
+    public function modify(User $user, Listing $listing): bool
     {
-        return false;
+        return $user->id == $listing->user_id && $user->role !== 'suspended';
     }
 }
